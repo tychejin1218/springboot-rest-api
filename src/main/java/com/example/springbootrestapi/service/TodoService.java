@@ -12,6 +12,7 @@ public class TodoService {
 
   private final TodoMapper todoMapper;
 
+  /** To-Do 조회 */
   public List<Todo.Response> getTodos(Todo.Request todoRequest) {
     return todoMapper.getTodos(todoRequest);
   }

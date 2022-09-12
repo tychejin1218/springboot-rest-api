@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 import org.apache.ibatis.type.Alias;
 
 public class Todo {
@@ -14,10 +13,10 @@ public class Todo {
   @Alias("TodoRequest")
   @Getter
   @Setter
-  @ToString
-  @SuperBuilder
-  @NoArgsConstructor
+  @Builder
   @AllArgsConstructor
+  @NoArgsConstructor
+  @ToString
   public static class Request {
 
     private Integer id;
@@ -29,10 +28,10 @@ public class Todo {
   @Alias("TodoResponse")
   @Getter
   @Setter
-  @ToString
-  @SuperBuilder
-  @NoArgsConstructor
+  @Builder
   @AllArgsConstructor
+  @NoArgsConstructor
+  @ToString
   public static class Response {
 
     private Integer id;

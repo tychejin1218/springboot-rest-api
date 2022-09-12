@@ -20,7 +20,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
     sqlSessionFactoryRef = "sqlSessionFactory"
 )
 @Configuration
-public class DataSourceConfig {
+public class DataSourceConfiguration {
 
   @Bean
   @ConfigurationProperties(prefix = "spring.datasource.hikari")

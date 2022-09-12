@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface TodoMapper {
 
-  /**  To Do 조회 */
+  /** To-Do 조회 */
   List<Todo.Response> getTodos(Todo.Request todoRequest);
 }

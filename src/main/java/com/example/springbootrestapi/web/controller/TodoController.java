@@ -17,7 +17,13 @@ public class TodoController {
 
   private final TodoService todoService;
 
-  @PostMapping(value = "/api/todos", produces = MediaType.APPLICATION_JSON_VALUE)
+  /**
+   * To-Do 조회
+   */
+  @PostMapping(
+      value = "/api/todos",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Todo.Response> getTodos(
       HttpServletRequest request,
       HttpServletResponse response,
