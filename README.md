@@ -9,5 +9,7 @@
   - ##### Gradle 7.5
 
 - #### 개발 설명
-  - ##### [Spring Boot] REST API 게시판 만들기(1) - 프로젝트 생성
-  	- ###### https://tychejin.tistory.com/392
+  - ##### [Spring Boot] REST API 만들기(1) - 프로젝트 생성
+    - ###### https://tychejin.tistory.com/392
+  - ##### [Spring Boot] REST API 만들기(2) - MySQL + MyBatis 연동
+    - ###### https://tychejin.tistory.com/394
