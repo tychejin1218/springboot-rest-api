@@ -1,3 +1,9 @@
+# server 설정
+server:
+  port: 8081
+
+---
+# datasource 설정
 spring:
   datasource:
     hikari:
@@ -5,3 +11,12 @@ spring:
       jdbc-url: jdbc:mysql://localhost:3306/sample?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
       username: sample
       password: password1!
+
+---
+# profiles 설정
+spring:
+  profiles:
+    active: local
+    group:
+      local: logging-type-console, loggin-leval-locol
+      dev: logging-type-file, loggin-leval-dev
