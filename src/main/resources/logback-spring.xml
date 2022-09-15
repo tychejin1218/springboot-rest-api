@@ -16,7 +16,6 @@
       </encoder>
     </appender>
   </springProfile>
-
   <springProfile name="logging-type-file">
     <appender name="PROFILE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
       <!-- 파일경로 설정 -->
@@ -49,17 +48,12 @@
     <!--특정 패키지 로그 레벨 설정-->
     <property name="LOG_LEVEL_root" value="DEBUG"/>
     <property name="LOG_LEVEL_com.example.springbootrestapi" value="DEBUG"/>
-    <property name="LOG_LEVEL_com.zaxxer.hikari" value="TRACE"/>
-    <property name="LOG_LEVEL_com.zaxxer.hikari.HikariConfig" value="WARN"/>
-    <property name="LOG_LEVEL_log4jdbc.log4j2" value="ERROR"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari" value="INFO"/>
   </springProfile>
-
   <springProfile name="logging-level-dev">
     <property name="LOG_LEVEL_root" value="INFO"/>
     <property name="LOG_LEVEL_com.example.springbootrestapi" value="INFO"/>
-    <property name="LOG_LEVEL_com.zaxxer.hikari" value="TRACE"/>
-    <property name="LOG_LEVEL_com.zaxxer.hikari.HikariConfig" value="DEBUG"/>
-    <property name="LOG_LEVEL_log4jdbc.log4j2" value="ERROR"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari" value="INFO"/>
   </springProfile>
 
   <!-- com.example.springbootrestapi -->
@@ -68,23 +62,9 @@
     additivity="false">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
-
   <!-- hikari -->
   <logger name="com.zaxxer.hikari"
-    level="${LOG_LEVEL_com.zaxxer.hikari}"
-    additivity="false">
-    <appender-ref ref="PROFILE-APPENDER"/>
-  </logger>
-  <logger name="com.zaxxer.hikari.HikariConfig"
-    level="${LOG_LEVEL_com.zaxxer.hikari.HikariConfig}"
-    additivity="false">
-    <appender-ref ref="PROFILE-APPENDER"/>
-  </logger>
-
-  <!-- log4jdbc.log4j2 -->
-  <logger name="log4jdbc.log4j2"
-    level="${LOG_LEVEL_log4jdbc.log4j2}"
-    additivity="false">
+    level="${LOG_LEVEL_com.zaxxer.hikari}">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
 
