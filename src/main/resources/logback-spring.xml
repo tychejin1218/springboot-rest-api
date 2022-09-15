@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 60초마다 설정 파일의 변경을 확인 하여 변경 시 갱신 -->
-<configuration scan="true" scanPeriod="60 seconds">
-
-  <!--Environment 내의 프로퍼티들을 개별적으로 설정 -->
-  <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>
+<configuration>
 
   <!-- log file path -->
   <property name="LOG_PATH" value="logs" />
@@ -51,40 +47,41 @@
   <!-- Profile 별로 로그 레벨을 설정 -->
   <springProfile name="logging-level-local">
     <!--특정 패키지 로그 레벨 설정-->
-    <property name="LOG_LEVEL_ROOT" value="DEBUG"/>
-    <property name="LOG_LEVEL_org.springframework" value="DEBUG"/>
-    <property name="LOG_LEVEL_org.apache" value="INFO"/>
+    <property name="LOG_LEVEL_root" value="DEBUG"/>
     <property name="LOG_LEVEL_com.example.springbootrestapi" value="DEBUG"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari" value="TRACE"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari.HikariConfig" value="WARN"/>
   </springProfile>
 
   <springProfile name="logging-level-dev">
-    <property name="LOG_LEVEL_ROOT" value="INFO"/>
-    <property name="LOG_LEVEL_org.springframework" value="INFO"/>
-    <property name="LOG_LEVEL_org.apache" value="INFO"/>
+    <property name="LOG_LEVEL_root" value="INFO"/>
     <property name="LOG_LEVEL_com.example.springbootrestapi" value="INFO"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari" value="TRACE"/>
+    <property name="LOG_LEVEL_com.zaxxer.hikari.HikariConfig" value="DEBUG"/>
   </springProfile>
 
-  <!-- 로그 레벨 설정 -->
-  <root level="${LOG_LEVEL_ROOT}">
-    <appender-ref ref="PROFILE-APPENDER" />
-  </root>
-  <!-- springframework -->
-  <logger name="org.springframework"
-    level="${LOG_LEVEL_org.springframework}"
-    additivity="false">
-    <appender-ref ref="PROFILE-APPENDER"/>
-  </logger>
-  <!-- apache -->
-  <logger name="org.apache"
-    level="${LOG_LEVEL_org.apache}"
-    additivity="false">
-    <appender-ref ref="PROFILE-APPENDER"/>
-  </logger>
   <!-- com.example.springbootrestapi -->
   <logger name="com.example.springbootrestapi"
     level="${LOG_LEVEL_com.example.springbootrestapi}"
     additivity="false">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
+
+  <!-- hikari -->
+  <logger name="com.zaxxer.hikari"
+    level="${LOG_LEVEL_com.zaxxer.hikari}"
+    additivity="false">
+    <appender-ref ref="PROFILE-APPENDER"/>
+  </logger>
+  <logger name="com.zaxxer.hikari.HikariConfig"
+    level="${LOG_LEVEL_com.zaxxer.hikari.HikariConfig}"
+    additivity="false">
+    <appender-ref ref="PROFILE-APPENDER"/>
+  </logger>
+
+  <!-- 로그 레벨 설정 -->
+  <root level="${LOG_LEVEL_root}">
+    <appender-ref ref="PROFILE-APPENDER" />
+  </root>
 
 </configuration>
