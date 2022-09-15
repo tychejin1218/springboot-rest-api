@@ -18,5 +18,5 @@ spring:
   profiles:
     active: local
     group:
-      local: logging-type-console, loggin-leval-locol
-      dev: logging-type-file, loggin-leval-dev
+      local: logging-type-console, logging-level-local
+      dev: logging-type-file, logging-level-dev
