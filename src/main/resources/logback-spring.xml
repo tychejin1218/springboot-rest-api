@@ -54,14 +54,14 @@
     <property name="LOG_LEVEL_ROOT" value="DEBUG"/>
     <property name="LOG_LEVEL_org.springframework" value="DEBUG"/>
     <property name="LOG_LEVEL_org.apache" value="INFO"/>
-    <property name="LOG_LEVEL_com.com.example.springbootrestapi" value="DEBUG"/>
+    <property name="LOG_LEVEL_com.example.springbootrestapi" value="DEBUG"/>
   </springProfile>
 
   <springProfile name="logging-level-dev">
     <property name="LOG_LEVEL_ROOT" value="INFO"/>
     <property name="LOG_LEVEL_org.springframework" value="INFO"/>
     <property name="LOG_LEVEL_org.apache" value="INFO"/>
-    <property name="LOG_LEVEL_com.com.example.springbootrestapi" value="INFO"/>
+    <property name="LOG_LEVEL_com.example.springbootrestapi" value="INFO"/>
   </springProfile>
 
   <!-- 로그 레벨 설정 -->
@@ -82,7 +82,7 @@
   </logger>
   <!-- com.example.springbootrestapi -->
   <logger name="com.example.springbootrestapi"
-    level="${LOG_LEVEL_com.com.example.springbootrestapi}"
+    level="${LOG_LEVEL_com.example.springbootrestapi}"
     additivity="false">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
