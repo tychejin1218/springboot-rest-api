@@ -6,9 +6,9 @@
   <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>
 
   <!-- log file path -->
-  <property name="LOG_PATH" value="logs/api.log" />
+  <property name="LOG_PATH" value="logs" />
   <!-- log file name -->
-  <property name="LOG_FILE_NAME" value="springboot_rest_log" />
+  <property name="LOG_FILE_NAME" value="springboot_rest_api" />
   <!-- pattern -->
   <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36} - %msg%n" />
 
