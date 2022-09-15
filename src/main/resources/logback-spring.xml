@@ -54,7 +54,7 @@
     <property name="LOG_LEVEL_ROOT" value="DEBUG"/>
     <property name="LOG_LEVEL_org.springframework" value="DEBUG"/>
     <property name="LOG_LEVEL_org.apache" value="INFO"/>
-    <property name="LOG_LEVEL_com.com.example.springbootrestapi" value="DEBUG"/>
+    <property name="LOG_LEVEL_com.example.springbootrestapi" value="DEBUG"/>
     <property name="LOG_LEVEL_log4jdbc.log4j2" value="DEBUG"/>
   </springProfile>
 
@@ -62,6 +62,7 @@
     <property name="LOG_LEVEL_ROOT" value="INFO"/>
     <property name="LOG_LEVEL_org.springframework" value="INFO"/>
     <property name="LOG_LEVEL_org.apache" value="INFO"/>
+    <property name="LOG_LEVEL_com.example.springbootrestapi" value="DEBUG"/>
     <property name="LOG_LEVEL_log4jdbc.log4j2" value="INFO"/>
   </springProfile>
 
@@ -83,7 +84,7 @@
   </logger>
   <!-- com.example.springbootrestapi -->
   <logger name="com.example.springbootrestapi"
-    level="${LOG_LEVEL_com.com.example.springbootrestapi}"
+    level="${LOG_LEVEL_com.example.springbootrestapi}"
     additivity="false">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
