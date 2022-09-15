@@ -15,3 +15,5 @@
     - ###### https://tychejin.tistory.com/394
   - ##### [Spring Boot] REST API 만들기(3) - Logback 설정
     - ###### https://tychejin.tistory.com/395
+  - ##### [Spring Boot] REST API 만들기(4) - Log4jdbc 설정
+    - ###### https://tychejin.tistory.com/396 
