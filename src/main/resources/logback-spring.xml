@@ -64,7 +64,8 @@
   </logger>
   <!-- hikari -->
   <logger name="com.zaxxer.hikari"
-    level="${LOG_LEVEL_com.zaxxer.hikari}">
+    level="${LOG_LEVEL_com.zaxxer.hikari}"
+    additivity="false">
     <appender-ref ref="PROFILE-APPENDER"/>
   </logger>
 
