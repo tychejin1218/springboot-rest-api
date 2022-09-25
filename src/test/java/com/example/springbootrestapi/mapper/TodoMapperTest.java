@@ -1,9 +1,6 @@
 package com.example.springbootrestapi.mapper;
 
-import com.example.springbootrestapi.config.DataSourceConfiguration;
 import com.example.springbootrestapi.domain.Todo;
-import com.example.springbootrestapi.domain.Todo.Response;
-import com.example.springbootrestapi.mapper.TodoMapper;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +20,7 @@ class TodoMapperTest {
 
   @Disabled("TodoMapper_To-Do 조회")
   @Test
-  void testGetTodos(){
+  void testGetTodos() {
 
     // Given
     Todo.Request todoRequest = Todo.Request.builder()
