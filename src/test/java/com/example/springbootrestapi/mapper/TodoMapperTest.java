@@ -4,7 +4,7 @@ import com.example.springbootrestapi.domain.Todo;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ class TodoMapperTest {
   TodoMapper todoMapper;
 
   @Transactional
-  @Disabled("getTodos_To-Do 목록 조회")
+  @DisplayName("getTodos_To-Do 목록 조회")
   @Test
   void testGetTodos() {
 
@@ -33,6 +33,7 @@ class TodoMapperTest {
     Todo.Request todoRequest = Todo.Request.builder()
         .title("Title Junit Test Insert")
         .description("Description Junit Test Insert")
+        .completed(true)
         .build();
 
     // When
@@ -43,7 +44,7 @@ class TodoMapperTest {
   }
 
   @Transactional
-  @Disabled("getTodoById_To-Do 상세 조회")
+  @DisplayName("getTodoById_To-Do 상세 조회")
   @Test
   void testGetTodoById() {
 
@@ -58,7 +59,7 @@ class TodoMapperTest {
   }
 
   @Transactional
-  @Disabled("insertTodo_To-Do 저장")
+  @DisplayName("insertTodo_To-Do 저장")
   @Test
   void testInsertTodo() {
 
@@ -80,7 +81,7 @@ class TodoMapperTest {
   }
 
   @Transactional
-  @Disabled("updateTodo_To-Do 수정")
+  @DisplayName("updateTodo_To-Do 수정")
   @Test
   void testUpdateTodo() {
 
@@ -101,6 +102,22 @@ class TodoMapperTest {
     Assertions.assertEquals(todoRequest.getTitle(), todoResponse.getTitle());
     Assertions.assertEquals(todoRequest.getDescription(), todoResponse.getDescription());
     Assertions.assertEquals(todoRequest.getCompleted(), todoResponse.getCompleted());
+  }
+
+  @Transactional
+  @DisplayName("deleteTodoById_To-Do 삭제")
+  @Test
+  void testDeleteTodoById() {
+
+    // Given
+    int insertId = insertTodo("Title Junit Test Insert", "Description Junit Test Insert", false);
+
+    // When
+    todoMapper.deleteTodoById(insertId);
+
+    // Then
+    Todo.Response todoResponse = todoMapper.getTodoById(insertId);
+    Assertions.assertNull(todoResponse);
   }
 
   /**

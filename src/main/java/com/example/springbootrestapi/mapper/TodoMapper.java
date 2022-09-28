@@ -28,5 +28,5 @@ public interface TodoMapper {
   /**
    * To-Do 삭제
    */
-  int deleteTodo(Todo.Request todoRequest);
+  int deleteTodoById(int id);
 }
