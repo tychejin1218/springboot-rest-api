@@ -1,3 +1,9 @@
+# server 설정
+server:
+  port: 8081
+
+---
+# datasource 설정
 spring:
   datasource:
     hikari:
