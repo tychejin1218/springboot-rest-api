@@ -2,6 +2,8 @@ package com.example.springbootrestapi.mapper;
 
 import com.example.springbootrestapi.domain.Todo;
 import java.util.List;
+import javax.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("local")
 class TodoMapperTest {
 
-  @Autowired
+  @Resource
   TodoMapper todoMapper;
 
   @Transactional
