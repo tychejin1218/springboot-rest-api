@@ -20,6 +20,9 @@
      <if test="description != null and description != ''">
        AND DESCRIPTION LIKE CONCAT('%', #{description}, '%')
      </if>
+     <if test="completed != null">
+       AND COMPLETED = #{completed}
+     </if>
     </where>
 
   </select>
