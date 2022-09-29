@@ -3,17 +3,13 @@ package com.example.springbootrestapi.mapper;
 import com.example.springbootrestapi.domain.Todo;
 import java.util.List;
 import javax.annotation.Resource;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @SpringBootTest
 @ActiveProfiles("local")
 class TodoMapperTest {
