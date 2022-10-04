@@ -4,7 +4,9 @@ import com.example.springbootrestapi.domain.Todo;
 import com.example.springbootrestapi.mapper.TodoMapper;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 @RequiredArgsConstructor
 @Service
@@ -29,15 +31,31 @@ public class TodoService {
   /**
    * To-Do 저장
    */
-  public int insertTodo(Todo.Request todoRequest) {
-    return todoMapper.insertTodo(todoRequest);
+  public Todo.Response insertTodo(Todo.Request todoRequest) {
+
+    Todo.Response todoResponse = Todo.Response.builder().build();
+
+    todoMapper.insertTodo(todoRequest);
+    if (!ObjectUtils.isEmpty(todoRequest.getId())) {
+      todoResponse = todoMapper.getTodoById(todoRequest.getId());
+    }
+
+    return todoResponse;
   }
 
   /**
    * To-Do 수정
    */
-  public int updateTodo(Todo.Request todoRequest) {
-    return todoMapper.updateTodo(todoRequest);
+  public Todo.Response updateTodo(Todo.Request todoRequest) {
+
+    Todo.Response todoResponse = Todo.Response.builder().build();
+
+    todoMapper.updateTodo(todoRequest);
+    if (!ObjectUtils.isEmpty(todoRequest.getId())) {
+      todoResponse = todoMapper.getTodoById(todoRequest.getId());
+    }
+
+    return todoResponse;
   }
 
   /**
