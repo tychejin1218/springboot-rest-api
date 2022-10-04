@@ -19,3 +19,5 @@
     - ###### https://tychejin.tistory.com/396 
   - ##### [Spring Boot] REST API 만들기(5) - Mapper 구현 및 단위 테스트(Junit5)
     - ###### https://tychejin.tistory.com/397 
+  - ##### [Spring Boot] REST API 만들기(6) - Service 구현 및 단위 테스트(Junit5)
+    - ###### https://tychejin.tistory.com/398 
