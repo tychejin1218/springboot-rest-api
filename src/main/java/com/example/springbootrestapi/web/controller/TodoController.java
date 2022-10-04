@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +21,9 @@ public class TodoController {
 
   private final TodoService todoService;
 
-  /** To-Do 조회 */
+  /**
+   * To-Do 조회
+   */
   @PostMapping(
       value = "/api/todos",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -30,5 +34,35 @@ public class TodoController {
       @RequestBody Todo.Request todoRequest) {
     log.info("todoRequest:[{}]", todoRequest.toString());
     return todoService.getTodos(todoRequest);
+  }
+
+  /**
+   * To-Do 조회
+   */
+  @GetMapping(
+      value = "/api/todo/{id}",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Todo.Response getTodoById(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @PathVariable int id) {
+    log.info("id:[{}]", id);
+    return todoService.getTodoById(id);
+  }
+
+  /**
+   * To-Do 저장
+   */
+  @PostMapping(
+      value = "/api/todo",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public int insertTodo(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @RequestBody Todo.Request todoRequest) {
+    log.info("todoRequest:[{}]", todoRequest.toString());
+    return todoService.insertTodo(todoRequest);
   }
 }
