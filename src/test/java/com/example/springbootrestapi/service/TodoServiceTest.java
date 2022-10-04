@@ -52,13 +52,18 @@ class TodoServiceTest {
   void testGetTodoById() {
 
     // Given
-    int insertId = insertTodo("Title Junit Test Insert", "Description Junit Test Insert", false);
+    String title = "Title Junit Test Insert";
+    String description = "Description Junit Test Insert";
+    boolean completed = false;
+    int insertId = insertTodo(title, description, completed);
 
     // When
     Todo.Response todoResponse = todoService.getTodoById(insertId);
 
     // Then
-    Assertions.assertEquals(insertId, todoResponse.getId());
+    Assertions.assertEquals(title, todoResponse.getTitle());
+    Assertions.assertEquals(description, todoResponse.getDescription());
+    Assertions.assertEquals(completed, todoResponse.getCompleted());
   }
 
   @Transactional
@@ -74,10 +79,9 @@ class TodoServiceTest {
         .build();
 
     // When
-    todoService.insertTodo(todoRequest);
+    Todo.Response todoResponse = todoService.insertTodo(todoRequest);
 
     // Then
-    Todo.Response todoResponse = todoService.getTodoById(todoRequest.getId());
     Assertions.assertEquals(todoRequest.getTitle(), todoResponse.getTitle());
     Assertions.assertEquals(todoRequest.getDescription(), todoResponse.getDescription());
     Assertions.assertEquals(todoRequest.getCompleted(), todoResponse.getCompleted());
@@ -89,7 +93,11 @@ class TodoServiceTest {
   void testUpdateTodo() {
 
     // Given
-    int insertId = insertTodo("Title Junit Test Insert", "Description Junit Test Insert", false);
+    String title = "Title Junit Test Insert";
+    String description = "Description Junit Test Insert";
+    boolean completed = false;
+    int insertId = insertTodo(title, description, completed);
+
     Todo.Request todoRequest = Todo.Request.builder()
         .id(insertId)
         .title("Title Junit Test Update")
@@ -98,10 +106,9 @@ class TodoServiceTest {
         .build();
 
     // When
-    todoService.updateTodo(todoRequest);
+    Todo.Response todoResponse = todoService.updateTodo(todoRequest);
 
     // Then
-    Todo.Response todoResponse = todoService.getTodoById(todoRequest.getId());
     Assertions.assertEquals(todoRequest.getTitle(), todoResponse.getTitle());
     Assertions.assertEquals(todoRequest.getDescription(), todoResponse.getDescription());
     Assertions.assertEquals(todoRequest.getCompleted(), todoResponse.getCompleted());
