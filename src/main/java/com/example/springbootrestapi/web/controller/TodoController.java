@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,5 +50,35 @@ public class TodoController {
       @PathVariable int id) {
     log.info("id:[{}]", id);
     return todoService.getTodoById(id);
+  }
+
+  /**
+   * To-Do 저장
+   */
+  @PostMapping(
+      value = "/api/todo",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Todo.Response insertTodo(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @RequestBody Todo.Request todoRequest) {
+    log.info("todoRequest:[{}]", todoRequest.toString());
+    return todoService.insertTodo(todoRequest);
+  }
+
+  /**
+   * To-Do 수정
+   */
+  @PutMapping(
+      value = "/api/todo",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Todo.Response updateTodo(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @RequestBody Todo.Request todoRequest) {
+    log.info("todoRequest:[{}]", todoRequest.toString());
+    return todoService.updateTodo(todoRequest);
   }
 }

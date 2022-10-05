@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -100,7 +101,73 @@ class TodoControllerTest {
         .andExpect(jsonPath("$.completed", equalTo(completed)))
         .andDo(print());
   }
-  
+
+  @Transactional
+  @DisplayName("insertTodo_To-Do 저장")
+  @Test
+  void testInsertTodo() throws Exception {
+
+    // Given
+    String url = "/api/todo";
+    Todo.Request todoRequest = Todo.Request.builder()
+        .title("Title Junit Test Insert")
+        .description("Description Junit Test Insert")
+        .completed(true)
+        .build();
+
+    // When
+    ResultActions resultActions = mockMvc.perform(
+        post(url)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(todoRequest))
+    );
+
+    // Then
+    resultActions
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.title", equalTo(todoRequest.getTitle())))
+        .andExpect(jsonPath("$.description", equalTo(todoRequest.getDescription())))
+        .andExpect(jsonPath("$.completed", equalTo(todoRequest.getCompleted())))
+        .andDo(print());
+  }
+
+  @Transactional
+  @DisplayName("updateTodo_To-Do 수정")
+  @Test
+  void testUpdateTodo() throws Exception {
+
+    // Given
+    String title = "Title Junit Test Insert";
+    String description = "Description Junit Test Insert";
+    boolean completed = false;
+    int insertId = insertTodo(title, description, completed);
+
+    String url = "/api/todo";
+    Todo.Request todoRequest = Todo.Request.builder()
+        .id(insertId)
+        .title("Title Junit Test Update")
+        .description("Description Junit Test Update")
+        .completed(true)
+        .build();
+
+    // When
+    ResultActions resultActions = mockMvc.perform(
+        put(url)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(todoRequest))
+    );
+
+    // Then
+    resultActions
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.title", equalTo(todoRequest.getTitle())))
+        .andExpect(jsonPath("$.description", equalTo(todoRequest.getDescription())))
+        .andExpect(jsonPath("$.completed", equalTo(todoRequest.getCompleted())))
+        .andDo(print());
+  }
+
   /**
    * To-Do 저장
    */
