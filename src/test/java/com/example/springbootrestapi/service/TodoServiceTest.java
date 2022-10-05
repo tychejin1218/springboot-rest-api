@@ -123,10 +123,9 @@ class TodoServiceTest {
     int insertId = insertTodo("Title Junit Test Insert", "Description Junit Test Insert", false);
 
     // When
-    todoService.deleteTodoById(insertId);
+    Todo.Response todoResponse = todoService.deleteTodoById(insertId);
 
     // Then
-    Todo.Response todoResponse = todoService.getTodoById(insertId);
     Assertions.assertNull(todoResponse);
   }
 
