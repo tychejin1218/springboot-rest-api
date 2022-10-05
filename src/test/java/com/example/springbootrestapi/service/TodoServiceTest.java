@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 class TodoServiceTest {
 
   @Resource
-  TodoMapper todoMapper;
+  TodoService todoService;
 
   @Resource
-  TodoService todoService;
+  TodoMapper todoMapper;
 
   @Transactional
   @DisplayName("getTodos_To-Do 목록 조회")
