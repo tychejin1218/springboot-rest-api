@@ -34,8 +34,8 @@ public class TodoService {
 
     Todo.Response todoResponse = Todo.Response.builder().build();
 
-    todoMapper.insertTodo(todoRequest);
-    if (!ObjectUtils.isEmpty(todoRequest.getId())) {
+    int result = todoMapper.insertTodo(todoRequest);
+    if (result > 0 && !ObjectUtils.isEmpty(todoRequest.getId())) {
       todoResponse = todoMapper.getTodoById(todoRequest.getId());
     }
 
@@ -49,8 +49,8 @@ public class TodoService {
 
     Todo.Response todoResponse = Todo.Response.builder().build();
 
-    todoMapper.updateTodo(todoRequest);
-    if (!ObjectUtils.isEmpty(todoRequest.getId())) {
+    int result = todoMapper.updateTodo(todoRequest);
+    if (result > 0) {
       todoResponse = todoMapper.getTodoById(todoRequest.getId());
     }
 
@@ -60,7 +60,15 @@ public class TodoService {
   /**
    * To-Do 삭제
    */
-  public int deleteTodoById(int id) {
-    return todoMapper.deleteTodoById(id);
+  public Todo.Response deleteTodoById(int id) {
+
+    Todo.Response todoResponse = Todo.Response.builder().build();
+
+    int result = todoMapper.deleteTodoById(id);
+    if (result > 0) {
+      todoResponse = todoMapper.getTodoById(id);
+    }
+
+    return todoResponse;
   }
 }
