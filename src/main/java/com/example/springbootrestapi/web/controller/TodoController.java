@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,5 +81,20 @@ public class TodoController {
       @RequestBody Todo.Request todoRequest) {
     log.info("todoRequest:[{}]", todoRequest.toString());
     return todoService.updateTodo(todoRequest);
+  }
+
+  /**
+   * To-Do 삭제
+   */
+  @DeleteMapping(
+      value = "/api/todo/{id}",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Todo.Response deleteTodo(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @PathVariable int id) {
+    log.info("id:[{}]", id);
+    return todoService.deleteTodoById(id);
   }
 }

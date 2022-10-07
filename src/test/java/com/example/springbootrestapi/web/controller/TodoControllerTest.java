@@ -2,6 +2,7 @@ package com.example.springbootrestapi.web.controller;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -165,6 +166,31 @@ class TodoControllerTest {
         .andExpect(jsonPath("$.title", equalTo(todoRequest.getTitle())))
         .andExpect(jsonPath("$.description", equalTo(todoRequest.getDescription())))
         .andExpect(jsonPath("$.completed", equalTo(todoRequest.getCompleted())))
+        .andDo(print());
+  }
+
+  @Transactional
+  @DisplayName("deleteTodo_To-Do 삭제")
+  @Test
+  void testDeleteTodo() throws Exception {
+
+    // Given
+    String title = "Title Junit Test Insert";
+    String description = "Description Junit Test Insert";
+    Boolean completed = false;
+    int insertId = insertTodo(title, description, completed);
+
+    String url = "/api/todo/" + insertId;
+
+    // When
+    ResultActions resultActions = mockMvc.perform(
+        delete(url)
+            .contentType(MediaType.APPLICATION_JSON)
+    );
+
+    // Then
+    resultActions
+        .andExpect(status().isOk())
         .andDo(print());
   }
 
