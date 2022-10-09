@@ -13,7 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
 @ComponentScan(basePackages = "com.example.springbootrestapi.service")
 @MapperScan(
     basePackages = "com.example.springbootrestapi.mapper",
@@ -48,5 +51,10 @@ public class DataSourceConfiguration {
       SqlSessionFactory sqlSessionFactory
   ) throws Exception {
     return new SqlSessionTemplate(sqlSessionFactory);
+  }
+
+  @Bean
+  public DataSourceTransactionManager transactionManager() {
+    return new DataSourceTransactionManager(dataSource());
   }
 }

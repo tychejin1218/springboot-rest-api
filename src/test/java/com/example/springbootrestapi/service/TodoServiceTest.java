@@ -3,6 +3,7 @@ package com.example.springbootrestapi.service;
 import com.example.springbootrestapi.domain.Todo;
 import com.example.springbootrestapi.domain.Todo.Response;
 import com.example.springbootrestapi.mapper.TodoMapper;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
@@ -146,5 +147,39 @@ class TodoServiceTest {
     todoMapper.insertTodo(todoRequest);
 
     return todoRequest.getId();
+  }
+
+  @DisplayName("insertTransactionTodo_To-Do 저장 시 트랜잭션 테스트")
+  @Test
+  void insertTransactionTodo() {
+
+    // Given
+    List<Todo.Request> todoRequests = new ArrayList<>();
+    todoRequests.add(Todo.Request.builder()
+        .title("Title Junit Test Insert 01")
+        .description("Description Junit Test Insert 02")
+        .completed(false)
+        .build());
+    todoRequests.add(Todo.Request.builder()
+        .title("Title Junit Test Insert 02")
+        .description("Description Junit Test Insert 02")
+        .completed(false)
+        .build());
+    todoRequests.add(Todo.Request.builder()
+        .title("#Title Junit Test Insert 03")
+        .description("Description Junit Test Insert 03")
+        .completed(false)
+        .build());
+
+    // When
+    int result = 0;
+    try {
+      result = todoService.insertTodos(todoRequests);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    // Then
+    Assertions.assertEquals(0, result);
   }
 }

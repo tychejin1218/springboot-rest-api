@@ -5,6 +5,7 @@ import com.example.springbootrestapi.mapper.TodoMapper;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 @RequiredArgsConstructor
@@ -70,5 +71,28 @@ public class TodoService {
     }
 
     return todoResponse;
+  }
+
+
+  /**
+   * To-Do 트랜잭션 테스트
+   */
+  @Transactional
+  public int insertTodos(List<Todo.Request> todoRequests) throws Exception {
+
+    int result = 0;
+
+    for (Todo.Request todoRequest : todoRequests) {
+      validTtileThrowRuntimeException(todoRequest.getTitle());
+      result += todoMapper.insertTodo(todoRequest);
+    }
+
+    return result;
+  }
+
+  private void validTtileThrowRuntimeException(String title) {
+    if (title.startsWith("#")) {
+      throw new RuntimeException(); // UnChecked Exception
+    }
   }
 }
