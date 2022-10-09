@@ -23,3 +23,5 @@
     - ###### https://tychejin.tistory.com/398 
   - ##### [Spring Boot] REST API 만들기(7) - Controller 구현 및 단위 테스트(Junit5)
     - ###### https://tychejin.tistory.com/399 
+  - ##### [Spring Boot] REST API 만들기(8) - Interceptor 적용
+    - ###### https://tychejin.tistory.com/400 
