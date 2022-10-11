@@ -17,6 +17,7 @@ public class TodoService {
   /**
    * To-Do 조회
    */
+  @Transactional(readOnly = true)
   public List<Todo.Response> getTodos(Todo.Request todoRequest) {
     return todoMapper.getTodos(todoRequest);
   }
@@ -24,6 +25,7 @@ public class TodoService {
   /**
    * To-Do 상세 조회
    */
+  @Transactional(readOnly = true)
   public Todo.Response getTodoById(int id) {
     return todoMapper.getTodoById(id);
   }
@@ -31,6 +33,7 @@ public class TodoService {
   /**
    * To-Do 저장
    */
+  @Transactional
   public Todo.Response insertTodo(Todo.Request todoRequest) {
 
     Todo.Response todoResponse = Todo.Response.builder().build();
@@ -46,6 +49,7 @@ public class TodoService {
   /**
    * To-Do 수정
    */
+  @Transactional
   public Todo.Response updateTodo(Todo.Request todoRequest) {
 
     Todo.Response todoResponse = Todo.Response.builder().build();
@@ -61,6 +65,7 @@ public class TodoService {
   /**
    * To-Do 삭제
    */
+  @Transactional
   public Todo.Response deleteTodoById(int id) {
 
     Todo.Response todoResponse = Todo.Response.builder().build();
@@ -73,26 +78,21 @@ public class TodoService {
     return todoResponse;
   }
 
-
   /**
-   * To-Do 트랜잭션 테스트
+   * To-Do 저장 시 title이 #으로 시작하는 경우 RuntimeException 발생
    */
   @Transactional
-  public int insertTodos(List<Todo.Request> todoRequests) throws Exception {
+  public int insertTodosFailed(List<Todo.Request> todoRequests) {
 
     int result = 0;
 
     for (Todo.Request todoRequest : todoRequests) {
-      validTtileThrowRuntimeException(todoRequest.getTitle());
+      if (todoRequest.getTitle().startsWith("#")) {
+        throw new RuntimeException("title이 #으로 시작");
+      }
       result += todoMapper.insertTodo(todoRequest);
     }
 
     return result;
-  }
-
-  private void validTtileThrowRuntimeException(String title) {
-    if (title.startsWith("#")) {
-      throw new RuntimeException(); // UnChecked Exception
-    }
   }
 }

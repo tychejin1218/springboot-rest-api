@@ -149,9 +149,9 @@ class TodoServiceTest {
     return todoRequest.getId();
   }
 
-  @DisplayName("insertTransactionTodo_To-Do 저장 시 트랜잭션 테스트")
+  @DisplayName("insertTodosFailed_To-Do 저장 시 title이 #으로 시작하는 경우 RuntimeException 발생")
   @Test
-  void insertTransactionTodo() {
+  void testInsertTodosFailed() {
 
     // Given
     List<Todo.Request> todoRequests = new ArrayList<>();
@@ -174,7 +174,7 @@ class TodoServiceTest {
     // When
     int result = 0;
     try {
-      result = todoService.insertTodos(todoRequests);
+      result = todoService.insertTodosFailed(todoRequests);
     } catch (Exception e) {
       e.printStackTrace();
     }
