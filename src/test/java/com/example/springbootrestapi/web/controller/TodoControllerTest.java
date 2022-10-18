@@ -51,12 +51,7 @@ class TodoControllerTest {
     insertTodo("Title Junit Test Insert 03", "Description Junit Test Insert 03", false);
     insertTodo("Title Junit Test Insert 04", "Description Junit Test Insert 04", true);
     insertTodo("Title Junit Test Insert 05", "Description Junit Test Insert 05", false);
-    insertTodo("Title Junit Test Insert 06", "Description Junit Test Insert 06", false);
-    insertTodo("Title Junit Test Insert 07", "Description Junit Test Insert 07", false);
-    insertTodo("Title Junit Test Insert 08", "Description Junit Test Insert 08", false);
-    insertTodo("Title Junit Test Insert 09", "Description Junit Test Insert 09", false);
-    insertTodo("Title Junit Test Insert 10", "Description Junit Test Insert 10", false);
-
+    
     String url = "/api/todos";
     Todo.Request todoRequest = Todo.Request.builder()
         .title("Title Junit Test Insert")
