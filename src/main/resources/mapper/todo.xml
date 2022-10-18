@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springbootrestapi.mapper.TodoMapper">
+
+  <select id="getTodos"
+    parameterType="com.example.springbootrestapi.domain.Todo$Request"
+    resultType="com.example.springbootrestapi.domain.Todo$Response">
+
+    SELECT ID
+         , TITLE
+         , DESCRIPTION
+         , COMPLETED
+      FROM TODO
+    <where>
+      <if test="title != null and title != ''">
+       AND TITLE LIKE CONCAT('%', #{title}, '%')
+     </if>
+     <if test="description != null and description != ''">
+       AND DESCRIPTION LIKE CONCAT('%', #{description}, '%')
+     </if>
+     <if test="completed != null">
+       AND COMPLETED = #{completed}
+     </if>
+    </where>
+
+  </select>
+
+  <select id="getTodoById"
+    parameterType="int"
+    resultType="com.example.springbootrestapi.domain.Todo$Response">
+
+    SELECT *
+      FROM TODO
+     WHERE ID = #{id}
+
+  </select>
+
+  <insert id="insertTodo"
+    useGeneratedKeys="true"
+    keyProperty="id"
+    parameterType="com.example.springbootrestapi.domain.Todo$Request">
+
+    INSERT
+      INTO TODO
+         (
+              TITLE
+            , DESCRIPTION
+            , COMPLETED
+          )
+    VALUES
+         (
+              #{title}
+            , #{description}
+            , #{completed}
+          )
+
+  </insert>
+
+  <update id="updateTodo"
+    parameterType="com.example.springbootrestapi.domain.Todo$Request">
+
+    UPDATE TODO
+       SET TITLE = #{title}
+         , DESCRIPTION = #{description}
+         , COMPLETED = #{completed}
+     WHERE ID = #{id}
+
+  </update>
+
+  <delete id="deleteTodoById"
+    parameterType="int">
+
+    DELETE
+      FROM TODO
+     WHERE ID = #{id}
+
+  </delete>
+
+</mapper>
